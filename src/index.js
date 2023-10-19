@@ -31,9 +31,6 @@ mongoose.connect(dbUrl, {userMongoClient: false}, (err) => {
 var server = http.listen(3000, () => {
     console.log('server at port:', server.address().port);
 });
-
-// TODO: add mongo db connection
-//      - install docker
-//      - build mongo image
-//      - run mongo_img
+// TODO: make moongose work
+    // TODO: rewrite without async? Also better understand async/await
 // TODO: test application
