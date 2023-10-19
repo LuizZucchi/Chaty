@@ -22,6 +22,8 @@ io.on('connection', () => {
     console.log('a user connected')
 })
 
+dbUrl = "mongodb://127.0.0.1:27017"
+
 mongoose.connect(dbUrl, {userMongoClient: false}, (err) => {
     console.log('mongodb connected', err);
 })
@@ -31,4 +33,7 @@ var server = http.listen(3000, () => {
 });
 
 // TODO: add mongo db connection
+//      - install docker
+//      - build mongo image
+//      - run mongo_img
 // TODO: test application
