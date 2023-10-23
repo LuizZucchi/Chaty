@@ -1,4 +1,3 @@
-const { MongoTopologyClosedError } = require('mongodb');
 const mongoose = require('mongoose');
 
 mongoose.set("strictQuery", false);
@@ -21,7 +20,7 @@ async function main() {
         user: "elzuko",
         pass: "221432",
     };
-	await mongoose.connect(mongoURL);
+	await mongoose.connect(mongoURL, authDict);
     const exampleModelInstance = new exampleModel({
         a_string: "testeString",
         a_int: 22,

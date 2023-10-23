@@ -1,18 +1,15 @@
-const { error } = require('console');
-const { Message } = require('./models/messageModel.js')
+const path = require('path');
 var express = require('express');
 var mongoose = require('mongoose');
 var app = express();
 var http = require('http').Server(app)
 var io = require('socket.io')(http);
+var bodyParser = require('body-parser')
 
-/*
-Arrow functions (params) => {
-    function_tasks
-}
-*/
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 // serve static files
-app.use('/', express.statuc(path.join(__dirname, '..', '/public')));
+app.use('/', express.static(path.join(__dirname, '..', '/public')));
 
 //routes
 app.use('/', require('./routes/root.js'));
@@ -22,15 +19,26 @@ io.on('connection', () => {
     console.log('a user connected')
 })
 
-dbUrl = "mongodb://127.0.0.1:27017"
+const dbUrl = "mongodb://localhost:27017/mydatabase"
 
-mongoose.connect(dbUrl, {userMongoClient: false}, (err) => {
+const authDict = {
+    authSource: "admin",
+    user: "elzuko",
+    pass: "221432",
+};
+
+mongoose.connect(dbUrl, authDict, {}, (err) => {
     console.log('mongodb connected', err);
 })
 
 var server = http.listen(3000, () => {
     console.log('server at port:', server.address().port);
 });
-// TODO: make moongose work
-    // TODO: rewrite without async? Also better understand async/await
-// TODO: test application
+
+module.exports = {
+    app,
+    io,
+    http
+}
+// TODO: testar app
+

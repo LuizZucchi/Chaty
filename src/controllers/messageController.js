@@ -1,4 +1,9 @@
-const { Message } = require('./models/messageModel.js')
+const { Message } = require('../models/messageModel.js')
+var express = require('express');
+var app = express();
+var http = require('http').Server(app)
+var io = require('socket.io')(http);
+
 
 const data = {
     messages: require('../models/mocks/messages.json'),
@@ -20,6 +25,7 @@ const getUserMessages = (req, res) => {
 
 const pubMessage = async (req, res) => {
     try {
+        console.log(req.body);
         var message = new Message(req.body);
 
         var savedMessage = await message.save()
