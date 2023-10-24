@@ -40,5 +40,5 @@ module.exports = {
     io,
     http
 }
-// TODO: testar app
-
+// TODO: implementar exemplo de auth jwt
+// TODO: criar repo git
