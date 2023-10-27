@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken');
+
 // Is there a way to use arrow function here and call then whenever I want?
 function fetchMessages() {
     fetch('http://localhost:3000/messages', {
@@ -20,10 +22,11 @@ function fetchLogin() {
             pwd: "123"
         }),
         headers: {
-            authorization: "mysecret"
+            'Content-Type': 'application/json'
         }
-    }).then((response) => console.log(response));
+    }).then((response) => console.log(response.userId));
 }
 
 
 fetchLogin()
+//fetchMessages()

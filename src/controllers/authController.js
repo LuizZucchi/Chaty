@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 
-const login = async (req, res) => {
+const login = async (req, res, next) => {
     if (req.body.user == 'Luiz' && req.body.pwd == '123') {
         const id = 1; // puxar do mongo esse id e entender melhor o q ele é
         const token = jwt.sign({ id }, process.env.SECRET, {
@@ -8,6 +8,7 @@ const login = async (req, res) => {
         });
         return res.json({ auth: true, token: token});
     }
+    console.log('aqui');
     res.status(500).json({message: 'Auth Failed'});
 }
 
